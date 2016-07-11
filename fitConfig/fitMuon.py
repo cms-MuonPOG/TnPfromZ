@@ -1,4 +1,4 @@
-Iimport FWCore.ParameterSet.Config as cms
+import FWCore.ParameterSet.Config as cms
 import sys, os, shutil
 from optparse import OptionParser
 ### USAGE: cmsRun fitMuonID.py TEST tight loose mc mc_all
@@ -95,7 +95,7 @@ if _id == "loose":
         Categories = cms.PSet(
             PF    = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
             #tag selection
-            #tag_IsoMu20 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
+            tag_IsoMu22 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
         ),
     
         Expressions = cms.PSet(
@@ -183,7 +183,7 @@ elif _id == "medium":
         Categories = cms.PSet(
             Medium   = cms.vstring("Medium Id. Muon", "dummy[pass=1,fail=0]"),
             #tag selection
-            #tag_IsoMu20 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
+            tag_IsoMu22 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
         ),
     
         Expressions = cms.PSet(
@@ -274,7 +274,7 @@ elif _id == 'tight':
         Categories = cms.PSet(
             Tight2012 = cms.vstring("Tight Id. Muon", "dummy[pass=1,fail=0]"),
             #tag selection
-            #tag_IsoMu20 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
+            tag_IsoMu22 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
         ),
     
         Expressions = cms.PSet(
@@ -366,7 +366,7 @@ elif _id == 'highpt':
         Categories = cms.PSet(
             HighPt = cms.vstring("High-pT Id. Muon", "dummy[pass=1,fail=0]"),
             #tag selection
-            #tag_IsoMu20 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
+            tag_IsoMu22 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
         ),
     
         Expressions = cms.PSet(
@@ -458,7 +458,7 @@ elif _id == 'soft':
             TMOST = cms.vstring("TMOneStationTight", "dummy[pass=1,fail=0]"),
             Track_HP = cms.vstring("High-Purity muons", "dummy[pass=1,fail=0]"),
             #tag selection
-            #tag_IsoMu20 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
+            tag_IsoMu22 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
         ),
     
         Expressions = cms.PSet(
@@ -528,8 +528,8 @@ if _id == "highpt" :
         eta = cms.vdouble(-2.4, -2.1, -1.6, -1.2, -0.9, -0.3, -0.2, 0.2, 0.3, 0.9, 1.2, 1.6, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     ETA_BINS_HPT = cms.PSet(
@@ -537,8 +537,8 @@ if _id == "highpt" :
         eta = cms.vdouble(-2.4, -2.1, -1.6, -1.2, -0.9, -0.3, -0.2, 0.2, 0.3, 0.9, 1.2, 1.6, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     COARSE_ETA_BINS = cms.PSet(
@@ -547,41 +547,41 @@ if _id == "highpt" :
         abseta = cms.vdouble(0.0, 0.9, 1.2, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     PT_ALLETA_BINS = cms.PSet(
         #Main
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 250, 500),
         abseta = cms.vdouble(  0.0, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120, 250, 500),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
         
     )
     PT_HIGHABSETA = cms.PSet(
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 30, 40, 50, 60, 80, 120, 200),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 30, 40, 50, 55, 60, 80, 120,  250, 500),
         abseta = cms.vdouble(2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     VTX_BINS_ETA24  = cms.PSet(
@@ -590,8 +590,8 @@ if _id == "highpt" :
         tag_nVertices = cms.vdouble(0.5,2.5,4.5,6.5,8.5,10.5,12.5,14.5,16.5,18.5,20.5,22.5,24.5,26.5,28.5,30.5),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"),
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"),
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     PHI_BINS = cms.PSet(
@@ -600,8 +600,8 @@ if _id == "highpt" :
         phi =  cms.vdouble(-3.1416, -2.618, -2.0944, -1.5708, -1.0472, -0.5236, 0, 0.5236, 1.0472, 1.5708, 2.0944, 2.618, 3.1416),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"),
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"),
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
 else:
@@ -610,8 +610,8 @@ else:
         eta = cms.vdouble(-2.4, -2.1, -1.6, -1.2, -0.9, -0.3, -0.2, 0.2, 0.3, 0.9, 1.2, 1.6, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     ETA_BINS_HPT = cms.PSet(
@@ -619,8 +619,8 @@ else:
         eta = cms.vdouble(-2.4, -2.1, -1.6, -1.2, -0.9, -0.3, -0.2, 0.2, 0.3, 0.9, 1.2, 1.6, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     COARSE_ETA_BINS = cms.PSet(
@@ -629,41 +629,41 @@ else:
         abseta = cms.vdouble(0.0, 0.9, 1.2, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     PT_ALLETA_BINS = cms.PSet(
         #Main
-        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
+        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 250, 500),
         abseta = cms.vdouble(  0.0, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
+        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 250, 500),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
         
     )
     PT_HIGHABSETA = cms.PSet(
-        pt     = cms.vdouble(20, 30, 40, 50, 60, 80, 120, 200),
+        pt     = cms.vdouble(20, 30, 40, 50, 60, 80, 120, 250, 500),
         abseta = cms.vdouble(2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"), 
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"), 
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     VTX_BINS_ETA24  = cms.PSet(
@@ -672,8 +672,8 @@ else:
         tag_nVertices = cms.vdouble(0.5,2.5,4.5,6.5,8.5,10.5,12.5,14.5,16.5,18.5,20.5,22.5,24.5,26.5,28.5,30.5),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"),
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"),
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     PHI_BINS = cms.PSet(
@@ -682,8 +682,8 @@ else:
         phi =  cms.vdouble(-3.1416, -2.618, -2.0944, -1.5708, -1.0472, -0.5236, 0, 0.5236, 1.0472, 1.5708, 2.0944, 2.618, 3.1416),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
-        tag_pt = cms.vdouble(21, 500),
-        #tag_IsoMu20 = cms.vstring("pass"),
+        tag_pt = cms.vdouble(23, 500),
+        tag_IsoMu22 = cms.vstring("pass"),
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
     
@@ -694,8 +694,8 @@ LOOSE_ETA_BINS = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 LOOSE_COARSE_ETA_BINS = cms.PSet(
@@ -705,29 +705,29 @@ LOOSE_COARSE_ETA_BINS = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 LOOSE_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 250, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 LOOSE_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120,  250, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 LOOSE_VTX_BINS_ETA24  = cms.PSet(
@@ -737,8 +737,8 @@ LOOSE_VTX_BINS_ETA24  = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 LOOSE_PHI_BINS = cms.PSet(
@@ -748,8 +748,8 @@ LOOSE_PHI_BINS = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
 #MEDIUM
@@ -759,8 +759,8 @@ MEDIUM_ETA_BINS = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 MEDIUM_COARSE_ETA_BINS = cms.PSet(
@@ -770,29 +770,29 @@ MEDIUM_COARSE_ETA_BINS = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 MEDIUM_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 250, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 MEDIUM_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 250, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     
 )
@@ -803,8 +803,8 @@ MEDIUM_VTX_BINS_ETA24  = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 MEDIUM_PHI_BINS = cms.PSet(
@@ -814,8 +814,8 @@ MEDIUM_PHI_BINS = cms.PSet(
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
 #TIGHT
@@ -826,8 +826,8 @@ TIGHT_ETA_BINS = cms.PSet(
     Tight2012 = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 TIGHT_COARSE_ETA_BINS = cms.PSet(
@@ -838,31 +838,31 @@ TIGHT_COARSE_ETA_BINS = cms.PSet(
     Tight2012 = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 TIGHT_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120,  250, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Tight2012 = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 TIGHT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 250, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Tight2012 = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 TIGHT_VTX_BINS_ETA24  = cms.PSet(
@@ -873,8 +873,8 @@ TIGHT_VTX_BINS_ETA24  = cms.PSet(
     Tight2012 = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 TIGHT_PHI_BINS = cms.PSet(
@@ -885,8 +885,8 @@ TIGHT_PHI_BINS = cms.PSet(
     Tight2012 = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
 
@@ -898,8 +898,8 @@ HIGHPT_ETA_BINS = cms.PSet(
     HighPt = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_ETA_BINS_HPT = cms.PSet(
@@ -909,8 +909,8 @@ HIGHPT_ETA_BINS_HPT = cms.PSet(
     HighPt = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_COARSE_ETA_BINS = cms.PSet(
@@ -921,31 +921,31 @@ HIGHPT_COARSE_ETA_BINS = cms.PSet(
     HighPt = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_PT_ALLETA_BINS = cms.PSet(
-    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
+    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120,  250, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     HighPt = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
+    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120,  250, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     HighPt = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"), 
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"), 
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_VTX_BINS_ETA24  = cms.PSet(
@@ -956,8 +956,8 @@ HIGHPT_VTX_BINS_ETA24  = cms.PSet(
     HighPt = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_PHI_BINS = cms.PSet(
@@ -968,8 +968,8 @@ HIGHPT_PHI_BINS = cms.PSet(
     HighPt = cms.vstring("pass"), 
     dzPV = cms.vdouble(-0.5, 0.5),
     #tag selections
-    tag_pt = cms.vdouble(21, 500),
-    #tag_IsoMu20 = cms.vstring("pass"),
+    tag_pt = cms.vdouble(23, 500),
+    tag_IsoMu22 = cms.vstring("pass"),
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
 
