@@ -564,7 +564,7 @@ if _id == "highpt" :
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120, 200, 500),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 200, 500),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
@@ -576,7 +576,7 @@ if _id == "highpt" :
         
     )
     PT_HIGHABSETA = cms.PSet(
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 30, 40, 50, 55, 60, 80, 120,  200, 500),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 30, 40, 50, 55, 60, 80, 120, 200, 500),
         abseta = cms.vdouble(2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
@@ -646,7 +646,7 @@ else:
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200, 500),
+        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
@@ -721,7 +721,7 @@ LOOSE_PT_ALLETA_BINS = cms.PSet(
 )
 LOOSE_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120,  200, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120,  200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
@@ -786,7 +786,7 @@ MEDIUM_PT_ALLETA_BINS = cms.PSet(
 )
 MEDIUM_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium2016 = cms.vstring("pass"), 
@@ -855,7 +855,7 @@ TIGHT_PT_ALLETA_BINS = cms.PSet(
 )
 TIGHT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Tight2012 = cms.vstring("pass"), 
@@ -938,7 +938,7 @@ HIGHPT_PT_ALLETA_BINS = cms.PSet(
 )
 HIGHPT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120,  200, 500),
+    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     HighPt = cms.vstring("pass"), 
@@ -1416,12 +1416,13 @@ for ID, ALLBINS in ID_BINS:
     shape = cms.vstring("vpvPlusExpo")
     #shape = "vpvPlusCheb"
     if not "Iso" in ID:  #customize only for ID
-        if (len(B.pt)==7): #customize only when the pT have the high pt bins
-            shape = cms.vstring("vpvPlusExpo","*pt_bin4*","vpvPlusCheb","*pt_bin5*","vpvPlusCheb")
-        elif (len(B.pt)==9): 
-            shape = cms.vstring("vpvPlusExpo","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb")
-    DEN = B.clone(); num = ID;
-    
+        if _id == "highpt" :
+            elif (len(B.pair_newTuneP_probe_pt)==11): 
+                shape = cms.vstring("vpvPlusExpo","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb","*pt_bin8*","vpvPlusCheb","*pt_bin9*","vpvPlusCheb")
+        else:
+            elif (len(B.pt)==10): 
+                shape = cms.vstring("vpvPlusExpo","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb","*pt_bin8*","vpvPlusCheb")
+    DEN = B.clone(); num = ID;    
 
     #compute isolation efficiency 
     if scenario == 'data_all':
