@@ -553,7 +553,7 @@ if _id == "highpt" :
     )
     PT_ALLETA_BINS = cms.PSet(
         #Main
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 250, 500),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 200, 500),
         abseta = cms.vdouble(  0.0, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
@@ -564,7 +564,7 @@ if _id == "highpt" :
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120, 250, 500),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120, 200, 500),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
@@ -576,7 +576,7 @@ if _id == "highpt" :
         
     )
     PT_HIGHABSETA = cms.PSet(
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 30, 40, 50, 55, 60, 80, 120,  250, 500),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 30, 40, 50, 55, 60, 80, 120,  200, 500),
         abseta = cms.vdouble(2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
@@ -635,7 +635,7 @@ else:
     )
     PT_ALLETA_BINS = cms.PSet(
         #Main
-        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 250, 500),
+        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
         abseta = cms.vdouble(  0.0, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
@@ -646,7 +646,7 @@ else:
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 250, 500),
+        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200, 500),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
@@ -658,7 +658,7 @@ else:
         
     )
     PT_HIGHABSETA = cms.PSet(
-        pt     = cms.vdouble(20, 30, 40, 50, 60, 80, 120, 250, 500),
+        pt     = cms.vdouble(20, 30, 40, 50, 60, 80, 120, 200, 500),
         abseta = cms.vdouble(2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
@@ -710,7 +710,7 @@ LOOSE_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 LOOSE_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 250, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
@@ -721,7 +721,7 @@ LOOSE_PT_ALLETA_BINS = cms.PSet(
 )
 LOOSE_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120,  250, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120,  200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"), 
@@ -775,7 +775,7 @@ MEDIUM_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 MEDIUM_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 250, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
@@ -786,7 +786,7 @@ MEDIUM_PT_ALLETA_BINS = cms.PSet(
 )
 MEDIUM_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 250, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium = cms.vstring("pass"), 
@@ -843,7 +843,7 @@ TIGHT_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 TIGHT_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120,  250, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120,  200, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Tight2012 = cms.vstring("pass"), 
@@ -855,7 +855,7 @@ TIGHT_PT_ALLETA_BINS = cms.PSet(
 )
 TIGHT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 250, 500),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Tight2012 = cms.vstring("pass"), 
@@ -926,7 +926,7 @@ HIGHPT_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_PT_ALLETA_BINS = cms.PSet(
-    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120,  250, 500),
+    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120,  200, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     HighPt = cms.vstring("pass"), 
@@ -938,7 +938,7 @@ HIGHPT_PT_ALLETA_BINS = cms.PSet(
 )
 HIGHPT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120,  250, 500),
+    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120,  200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     HighPt = cms.vstring("pass"), 
