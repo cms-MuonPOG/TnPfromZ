@@ -464,11 +464,13 @@ elif _id == 'soft':
         Expressions = cms.PSet(
             #ID 
             SoftVar = cms.vstring("SoftVar", "TMOST == 1 && tkTrackerLay > 5 && tkPixelLay > 0 && abs(dzPV) < 20 && abs(dB) < 0.3 && Track_HP == 1", "TMOST","tkTrackerLay", "tkPixelLay", "dzPV", "dB", "Track_HP"),
+            SoftVar2016 = cms.vstring("SoftVar", "TMOST == 1 && tkTrackerLay > 5 && tkPixelLay > 0 && abs(dzPV) < 20 && abs(dB) < 0.3", "TMOST","tkTrackerLay", "tkPixelLay", "dzPV", "dB"),
         ),
     
         Cuts = cms.PSet(
             #ID
             SoftID = cms.vstring("Soft", "SoftVar", "0.5"),
+            SoftID2016 = cms.vstring("Soft2016", "SoftVar2016", "0.5"),
         ),
     
                               
@@ -605,7 +607,7 @@ if _id == "highpt" :
         tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
     )
 else:
-        ETA_BINS = cms.PSet(
+    ETA_BINS = cms.PSet(
         pt  = cms.vdouble(20, 500),
         eta = cms.vdouble(-2.4, -2.1, -1.6, -1.2, -0.9, -0.3, -0.2, 0.2, 0.3, 0.9, 1.2, 1.6, 2.1, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
@@ -1022,7 +1024,8 @@ if sample == "data":
     process.TnP_MuonID = Template.clone(
         InputFileNames = cms.vstring(
             #'root://eoscms//eos/cms//store/group/phys_muon/TagAndProbe/Run2016/80X_v1/data/TnPTree_80X_Run2016B_v2_DCSOnly_RunList.root'
-            '../Production/TnPTree_80X_Run2016B_v2_DCSOnly_RunList.root'
+            #'../Production/TnPTree_80X_Run2016B_v2_DCSOnly_RunList.root'
+            '/data/battilan/Commissioning2016/TnP/TnPTree_80X_Run2016C_v2_GoldenJSON_Run275126to275783.root'            
             ),
         InputTreeName = cms.string("fitter_tree"),
         InputDirectoryName = cms.string("tpTree"),
@@ -1071,7 +1074,7 @@ if _id == 'loose' and _iso == 'noiso':
         (("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_eta", ETA_BINS)),
         (("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
         (("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
-        #(("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_pt_vtx", VTX_BINS_ETA26)),
+        (("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_pt_vtx", VTX_BINS_ETA24)),
         #(("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_phi", PHI_BINS)),
         ]
 
@@ -1091,11 +1094,11 @@ elif _id == 'medium' and _iso == 'noiso':
         ]
     elif binning == 'all':
         ID_BINS = [
-        #(("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_eta", ETA_BINS)),
-        #(("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
-        #(("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_eta", ETA_BINS)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
         (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_vtx", VTX_BINS_ETA24)),
-        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_phi", PHI_BINS)),
+        #(("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_phi", PHI_BINS)),
         ]
         
 #Tight ID
@@ -1117,7 +1120,7 @@ elif _id == 'tight' and _iso == 'noiso':
         (("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_eta", ETA_BINS)),
         (("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
         (("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
-        #(("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
+        (("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
         #(("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_phi", PHI_BINS)),
         ]
 
@@ -1142,7 +1145,7 @@ elif _id == 'highpt' and _iso == 'noiso':
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_eta", ETA_BINS_HPT)),
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
-        #(("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
+        (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
         #(("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_phi", PHI_BINS)),
         ]
 
@@ -1150,21 +1153,22 @@ elif _id == 'highpt' and _iso == 'noiso':
 elif _id == 'soft' and _iso == 'noiso':
     if binning == 'eta':
         ID_BINS = [
-        (("SoftID"), ("NUM_SoftID_DEN_genTracks_PAR_eta", ETA_BINS)),
+        (("SoftID2016"), ("NUM_SoftID_DEN_genTracks_PAR_eta", ETA_BINS)),
         ]
     elif binning == 'pt_alleta':
         ID_BINS = [
-        (("SoftID"), ("NUM_SoftID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
+        (("SoftID2016"), ("NUM_SoftID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
         ]
     elif binning == 'pt_spliteta':
         ID_BINS = [
-        (("SoftID"), ("NUM_SoftID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        (("SoftID2016"), ("NUM_SoftID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
         ]
     elif binning == 'all':
         ID_BINS = [
-        (("SoftID"), ("NUM_SoftID_DEN_genTracks_PAR_eta", ETA_BINS)),
-        (("SoftID"), ("NUM_SoftID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
-        (("SoftID"), ("NUM_SoftID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        (("SoftID2016"), ("NUM_SoftID_DEN_genTracks_PAR_eta", ETA_BINS)),
+        (("SoftID2016"), ("NUM_SoftID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
+        (("SoftID2016"), ("NUM_SoftID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        (("SoftID2016"), ("NUM_SoftID_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
         ]
 
         
@@ -1187,11 +1191,11 @@ elif _id == 'loose' and _iso == 'loose':
         ]
     elif binning == 'all':
         ID_BINS = [
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_eta", LOOSE_ETA_BINS)),
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_pt_alleta_bin1", LOOSE_PT_ALLETA_BINS)),
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_pt_spliteta_bin1", LOOSE_PT_ETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_eta", LOOSE_ETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_pt_alleta_bin1", LOOSE_PT_ALLETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_pt_spliteta_bin1", LOOSE_PT_ETA_BINS)),
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_vtx", LOOSE_VTX_BINS_ETA24)),
-        (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_phi", LOOSE_PHI_BINS)),
+        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_phi", LOOSE_PHI_BINS)),
         ]
 
 elif _id == 'medium' and _iso == 'loose':
@@ -1209,11 +1213,11 @@ elif _id == 'medium' and _iso == 'loose':
        ] 
     elif binning == 'all':
         ID_BINS = [
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_eta", MEDIUM_ETA_BINS)),
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_pt_alleta_bin1", MEDIUM_PT_ALLETA_BINS)),
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_pt_spliteta_bin1", MEDIUM_PT_ETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_eta", MEDIUM_ETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_pt_alleta_bin1", MEDIUM_PT_ALLETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_pt_spliteta_bin1", MEDIUM_PT_ETA_BINS)),
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_vtx", MEDIUM_VTX_BINS_ETA24)),
-        (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_phi", MEDIUM_PHI_BINS)),
+        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_phi", MEDIUM_PHI_BINS)),
         ]
 
 elif _id == 'tight' and _iso == 'loose':
@@ -1231,11 +1235,11 @@ elif _id == 'tight' and _iso == 'loose':
         ]
     elif binning == 'all':
         ID_BINS = [
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_eta", TIGHT_ETA_BINS)),
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_pt_alleta_bin1", TIGHT_PT_ALLETA_BINS)),
-        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_pt_spliteta_bin1", TIGHT_PT_ETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_eta", TIGHT_ETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_pt_alleta_bin1", TIGHT_PT_ALLETA_BINS)),
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_pt_spliteta_bin1", TIGHT_PT_ETA_BINS)),
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_vtx", TIGHT_VTX_BINS_ETA24)),
-        (("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_phi", TIGHT_PHI_BINS)),
+        #(("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_phi", TIGHT_PHI_BINS)),
         ]
 
 #Tight Iso
@@ -1266,7 +1270,7 @@ elif _id == 'tight' and _iso == 'tight':
         (("TightIso4"), ("NUM_TightRelIso_DEN_TightID_PAR_pt_alleta_bin1", TIGHT_PT_ALLETA_BINS)),
         (("TightIso4"), ("NUM_TightRelIso_DEN_TightID_PAR_pt_spliteta_bin1", TIGHT_PT_ETA_BINS)),
         (("TightIso4"), ("NUM_TightRelIso_DEN_TightID_PAR_vtx", TIGHT_VTX_BINS_ETA24)),
-        (("TightIso4"), ("NUM_TightRelIso_DEN_TightID_PAR_phi", TIGHT_PHI_BINS)),
+        #(("TightIso4"), ("NUM_TightRelIso_DEN_TightID_PAR_phi", TIGHT_PHI_BINS)),
         ]
 
 elif _id == 'medium' and _iso == 'tight':
@@ -1287,7 +1291,7 @@ elif _id == 'medium' and _iso == 'tight':
         (("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_eta", MEDIUM_ETA_BINS)),
         (("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_pt_alleta_bin1", MEDIUM_PT_ALLETA_BINS)),
         (("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_pt_spliteta_bin1", MEDIUM_PT_ETA_BINS)),
-        #(("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_vtx", MEDIUM_VTX_BINS_ETA24)),
+        (("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_vtx", MEDIUM_VTX_BINS_ETA24)),
         #(("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_phi", MEDIUM_PHI_BINS)),
         ]
 
@@ -1321,11 +1325,11 @@ elif _id == 'highpt' and _iso == 'tktight':
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_pt_alleta_bin1", HIGHPT_PT_ALLETA_BINS)),
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_pt_spliteta_bin1", HIGHPT_PT_ETA_BINS)),
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_vtx", HIGHPT_VTX_BINS_ETA24)),
-        (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_phi", HIGHPT_PHI_BINS)),
+        #(("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_phi", HIGHPT_PHI_BINS)),
         ]
 
 #Loose tk Iso
-elif _id == 'highpt' and _iso == 'tktight':
+elif _id == 'highpt' and _iso == 'tkloose':
     if binning == 'eta':
         ID_BINS = [
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS)),
@@ -1354,7 +1358,7 @@ elif _id == 'highpt' and _iso == 'tktight':
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_pt_alleta_bin1", HIGHPT_PT_ALLETA_BINS)),
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_pt_spliteta_bin1", HIGHPT_PT_ETA_BINS)),
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_vtx", HIGHPT_VTX_BINS_ETA24)),
-        (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_phi", HIGHPT_PHI_BINS)),
+        #(("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_phi", HIGHPT_PHI_BINS)),
         ]
 
 #Loose tk Iso
@@ -1385,7 +1389,7 @@ elif _id == 'tight' and _iso == 'tkloose':
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_TightID_PAR_pt_alleta_bin1", TIGHT_PT_ALLETA_BINS)),
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_TightID_PAR_pt_spliteta_bin1", TIGHT_PT_ETA_BINS)),
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_TightID_PAR_vtx", TIGHT_VTX_BINS_ETA24)),
-        (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_TightID_PAR_phi", TIGHT_PHI_BINS)),
+        #(("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_TightID_PAR_phi", TIGHT_PHI_BINS)),
         ]
 
 else:
@@ -1417,26 +1421,29 @@ for ID, ALLBINS in ID_BINS:
     #shape = "vpvPlusCheb"
     if not "Iso" in ID:  #customize only for ID
         if _id == "highpt" :
-            elif (len(B.pair_newTuneP_probe_pt)==11): 
+            if (len(B.pair_newTuneP_probe_pt)==11): 
                 shape = cms.vstring("vpvPlusExpo","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb","*pt_bin8*","vpvPlusCheb","*pt_bin9*","vpvPlusCheb")
         else:
-            elif (len(B.pt)==10): 
+            if (len(B.pt)==10): 
                 shape = cms.vstring("vpvPlusExpo","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb","*pt_bin8*","vpvPlusCheb")
     DEN = B.clone(); num = ID;    
 
+    mass_variable ="mass"
+    if _id == "highpt" :
+        mass_variable = "pair_newTuneP_mass"
     #compute isolation efficiency 
     if scenario == 'data_all':
         if num.find("Iso4") != -1: 
             setattr(module.Efficiencies, ID+"_"+X, cms.PSet(
                 EfficiencyCategoryAndState = cms.vstring(num,"below"),
-                UnbinnedVariables = cms.vstring("mass"),
+                UnbinnedVariables = cms.vstring(mass_variable),
                 BinnedVariables = DEN,
                 BinToPDFmap = shape
                 ))
         else:
             setattr(module.Efficiencies, ID+"_"+X, cms.PSet(
                 EfficiencyCategoryAndState = cms.vstring(num,"above"),
-                UnbinnedVariables = cms.vstring("mass"),
+                UnbinnedVariables = cms.vstring(mass_variable),
                 BinnedVariables = DEN,
                 BinToPDFmap = shape
                 ))
@@ -1446,14 +1453,14 @@ for ID, ALLBINS in ID_BINS:
         if num.find("Iso4") != -1: 
             setattr(module.Efficiencies, ID+"_"+X, cms.PSet(
                 EfficiencyCategoryAndState = cms.vstring(num,"below"),
-                UnbinnedVariables = cms.vstring("mass","weight"),
+                UnbinnedVariables = cms.vstring(mass_variable,"weight"),
                 BinnedVariables = DEN,
                 BinToPDFmap = shape
                 ))
         else:
             setattr(module.Efficiencies, ID+"_"+X, cms.PSet(
                 EfficiencyCategoryAndState = cms.vstring(num,"above"),
-                UnbinnedVariables = cms.vstring("mass","weight"),
+                UnbinnedVariables = cms.vstring(mass_variable,"weight"),
                 BinnedVariables = DEN,
                 BinToPDFmap = shape
                 ))
