@@ -1129,7 +1129,7 @@ elif _id == 'highpt' and _iso == 'noiso':
     if binning == 'eta':
         ID_BINS = [
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_eta", ETA_BINS)),
-        (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_eta", ETA_BINS_HPT)),
+        (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_eta_hpt", ETA_BINS_HPT)),
         ]
     elif binning == 'pt_alleta':
         ID_BINS = [
@@ -1142,7 +1142,7 @@ elif _id == 'highpt' and _iso == 'noiso':
     elif binning == 'all':
         ID_BINS = [
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_eta", ETA_BINS)),
-        (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_eta", ETA_BINS_HPT)),
+        (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_eta_hpt", ETA_BINS_HPT)),
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
         (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
@@ -1300,7 +1300,7 @@ elif _id == 'highpt' and _iso == 'tktight':
     if binning == 'eta':
         ID_BINS = [
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS)),
-        (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS_HPT)),
+        (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_eta_hpt", HIGHPT_ETA_BINS_HPT)),
         ]
     elif binning == 'pt_alleta':
         ID_BINS = [
@@ -1321,7 +1321,7 @@ elif _id == 'highpt' and _iso == 'tktight':
     elif binning == 'all':
         ID_BINS = [
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS)),
-        (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS_HPT)),
+        (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_eta_hpt", HIGHPT_ETA_BINS_HPT)),
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_pt_alleta_bin1", HIGHPT_PT_ALLETA_BINS)),
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_pt_spliteta_bin1", HIGHPT_PT_ETA_BINS)),
         (("TightTkIso3"), ("NUM_TightRelTkIso_DEN_HighPtID_PAR_vtx", HIGHPT_VTX_BINS_ETA24)),
@@ -1333,7 +1333,7 @@ elif _id == 'highpt' and _iso == 'tkloose':
     if binning == 'eta':
         ID_BINS = [
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS)),
-        (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS_HPT)),
+        (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_eta_hpt", HIGHPT_ETA_BINS_HPT)),
         ]
     elif binning == 'pt_alleta':
         ID_BINS = [
@@ -1354,7 +1354,7 @@ elif _id == 'highpt' and _iso == 'tkloose':
     elif binning == 'all':
         ID_BINS = [
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS)),
-        (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_eta", HIGHPT_ETA_BINS_HPT)),
+        (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_eta_hpt", HIGHPT_ETA_BINS_HPT)),
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_pt_alleta_bin1", HIGHPT_PT_ALLETA_BINS)),
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_pt_spliteta_bin1", HIGHPT_PT_ETA_BINS)),
         (("LooseTkIso3"), ("NUM_LooseRelTkIso_DEN_HighPtID_PAR_vtx", HIGHPT_VTX_BINS_ETA24)),
@@ -1433,7 +1433,7 @@ for ID, ALLBINS in ID_BINS:
         mass_variable = "pair_newTuneP_mass"
     #compute isolation efficiency 
     if scenario == 'data_all':
-        if num.find("Iso4") != -1: 
+        if num.find("Iso4") != -1 or num.find("Iso3") != -1: 
             setattr(module.Efficiencies, ID+"_"+X, cms.PSet(
                 EfficiencyCategoryAndState = cms.vstring(num,"below"),
                 UnbinnedVariables = cms.vstring(mass_variable),
