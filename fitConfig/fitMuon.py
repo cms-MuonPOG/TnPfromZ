@@ -53,8 +53,8 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1) )
 if not _iso in ['noiso', 'loose', 'tight', 'tkloose', 'tktight']: 
     print '@ERROR: _iso should be \'noiso\', \'loose\', \'tight\', \'tkloose\' or \'tktight\'. You used', _iso, '.Abort'
     sys.exit()
-if not _id in ['loose', 'medium', 'medium_ichep', 'tight', 'soft', 'highpt']: 
-    print '@ERROR: _id should be \'loos\', \'medium\', \'medium_ichep\', \'tight\', \'soft\', or \'highpt\'. You used', _id, '.Abort'
+if not _id in ['loose', 'medium', 'tight', 'soft', 'highpt']: 
+    print '@ERROR: _id should be \'loos\', \'medium\', \'tight\', \'soft\', or \'highpt\'. You used', _id, '.Abort'
     sys.exit()
 
 #_*_*_*_*_*_*_*_*_*_*_*_*
