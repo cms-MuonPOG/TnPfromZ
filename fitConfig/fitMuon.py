@@ -181,19 +181,19 @@ elif _id == "medium":
             ),
     
         Categories = cms.PSet(
-            Medium   = cms.vstring("Medium Id. Muon", "dummy[pass=1,fail=0]"),
+            Medium2016  = cms.vstring("Medium Id. Muon (ICHEP version)", "dummy[pass=1,fail=0]"),
             #tag selection
             tag_IsoMu22 = cms.vstring("PF Muon", "dummy[pass=1,fail=0]"),
         ),
     
         Expressions = cms.PSet(
             #ID 
-            Medium_noIPVar= cms.vstring("Medium_noIPVar", "Medium==1", "Medium"),
+            Medium2016_noIPVar= cms.vstring("Medium2016_noIPVar", "Medium2016==1", "Medium2016"),
         ),
     
         Cuts = cms.PSet(
             #ID
-            Medium_noIP= cms.vstring("Medium_noIP", "Medium_noIPVar", "0.5"),
+            Medium2016_noIP= cms.vstring("Medium2016_noIP", "Medium2016_noIPVar", "0.5"),
             #Isolations
             LooseIso4 = cms.vstring("LooseIso4" ,"combRelIsoPF04dBeta", "0.25"),
             TightIso4 = cms.vstring("TightIso4" ,"combRelIsoPF04dBeta", "0.15"),
@@ -757,7 +757,7 @@ MEDIUM_ETA_BINS = cms.PSet(
     pt  = cms.vdouble(20, 500),
     eta = cms.vdouble(-2.4, -2.1, -1.6, -1.2, -0.9, -0.3, -0.2, 0.2, 0.3, 0.9, 1.2, 1.6, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
-    Medium = cms.vstring("pass"), 
+    Medium2016 = cms.vstring("pass"), 
     #tag selections
     tag_pt = cms.vdouble(23, 500),
     tag_IsoMu22 = cms.vstring("pass"), 
@@ -768,7 +768,7 @@ MEDIUM_COARSE_ETA_BINS = cms.PSet(
     pt     = cms.vdouble(20, 500),
     abseta = cms.vdouble(0.0, 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
-    Medium = cms.vstring("pass"), 
+    Medium2016 = cms.vstring("pass"), 
     #tag selections
     tag_pt = cms.vdouble(23, 500),
     tag_IsoMu22 = cms.vstring("pass"), 
@@ -778,7 +778,7 @@ MEDIUM_PT_ALLETA_BINS = cms.PSet(
     pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
-    Medium = cms.vstring("pass"), 
+    Medium2016 = cms.vstring("pass"), 
     #tag selections
     tag_pt = cms.vdouble(23, 500),
     tag_IsoMu22 = cms.vstring("pass"), 
@@ -789,7 +789,7 @@ MEDIUM_PT_ETA_BINS = cms.PSet(
     pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200, 500),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
-    Medium = cms.vstring("pass"), 
+    Medium2016 = cms.vstring("pass"), 
     #tag selections
     tag_pt = cms.vdouble(23, 500),
     tag_IsoMu22 = cms.vstring("pass"), 
@@ -801,7 +801,7 @@ MEDIUM_VTX_BINS_ETA24  = cms.PSet(
     abseta = cms.vdouble(  0.0, 2.4),
     tag_nVertices = cms.vdouble(0.5,2.5,4.5,6.5,8.5,10.5,12.5,14.5,16.5,18.5,20.5,22.5,24.5,26.5,28.5,30.5),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
-    Medium = cms.vstring("pass"), 
+    Medium2016 = cms.vstring("pass"), 
     #tag selections
     tag_pt = cms.vdouble(23, 500),
     tag_IsoMu22 = cms.vstring("pass"),
@@ -812,7 +812,7 @@ MEDIUM_PHI_BINS = cms.PSet(
     abseta = cms.vdouble(  0.0, 2.4),
     phi =  cms.vdouble(-3.1416, -2.618, -2.0944, -1.5708, -1.0472, -0.5236, 0, 0.5236, 1.0472, 1.5708, 2.0944, 2.618, 3.1416),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
-    Medium = cms.vstring("pass"), 
+    Medium2016 = cms.vstring("pass"), 
     #tag selections
     tag_pt = cms.vdouble(23, 500),
     tag_IsoMu22 = cms.vstring("pass"),
@@ -1079,23 +1079,23 @@ if _id == 'loose' and _iso == 'noiso':
 elif _id == 'medium' and _iso == 'noiso':
     if binning == 'eta':
         ID_BINS = [
-        (("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_eta", ETA_BINS)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_eta", ETA_BINS)),
         ]
     elif binning == 'pt_alleta':
         ID_BINS = [
-        (("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
         ]
     elif binning == 'pt_spliteta':
         ID_BINS = [
-        (("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
         ]
     elif binning == 'all':
         ID_BINS = [
-        #(("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_eta", ETA_BINS)),
-        #(("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
-        #(("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
-        (("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_vtx", VTX_BINS_ETA24)),
-        (("Medium_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_phi", PHI_BINS)),
+        #(("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_eta", ETA_BINS)),
+        #(("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_alleta_bin1", PT_ALLETA_BINS)),
+        #(("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_vtx", VTX_BINS_ETA24)),
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_phi", PHI_BINS)),
         ]
         
 #Tight ID
