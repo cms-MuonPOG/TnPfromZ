@@ -49,6 +49,8 @@ bgFitFunction = 'default'
 if len(args) > 7: bgFitFunction = args[7]
 if bgFitFunction == 'CMSshape':
     print 'Will use the CMS shape to fit the background'
+elif bgFitFunction == 'custom':
+    print 'Will experiment with custom fit functions'
 else:
     print 'Will use the standard fit functions for the backgroud'
 
@@ -88,7 +90,7 @@ if _id == "loose":
             mass = cms.vstring("Tag-muon Mass", _mrange, "130", "GeV/c^{2}"),
             #variables for track only DEN
             tag_nVertices   = cms.vstring("Number of vertices", "0", "999", ""),
-            phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
+            #phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
             pt = cms.vstring("muon p_{T}", "0", "1000", "GeV/c"),
             eta    = cms.vstring("muon #eta", "-2.5", "2.5", ""),
             abseta = cms.vstring("muon |#eta|", "0", "2.5", ""),
@@ -164,6 +166,15 @@ if _id == "loose":
                 "RooCMSShape::backgroundFail(mass, alphaFail[70.,60.,90.], betaFail[0.001, 0.,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
                 "efficiency[0.9,0.7,1]",
                 "signalFractionInPassing[0.9]"
+            ),
+            vpvPlusCMSbeta0p2 = cms.vstring(
+                "Voigtian::signal1(mass, mean1[90,80,100], width[2.495], sigma1[2,1,3])",
+                "Voigtian::signal2(mass, mean2[90,80,100], width,        sigma2[4,3,10])",
+                "SUM::signal(vFrac[0.8,0.5,1]*signal1, signal2)",
+                "RooCMSShape::backgroundPass(mass, alphaPass[70.,60.,90.], betaPass[0.001, 0.,0.1], gammaPass[0.001, 0.,0.1], peakPass[90.0])",
+                "RooCMSShape::backgroundFail(mass, alphaFail[70.,60.,90.], betaFail[0.03, 0.02,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
+                "efficiency[0.9,0.7,1]",
+                "signalFractionInPassing[0.9]"
             )
         ),
 
@@ -187,7 +198,7 @@ elif _id == "medium":
             pt = cms.vstring("muon p_{T}", "0", "1000", "GeV/c"),
             eta    = cms.vstring("muon #eta", "-2.5", "2.5", ""),
             tag_nVertices   = cms.vstring("Number of vertices", "0", "999", ""),
-            phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
+            #phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
             abseta = cms.vstring("muon |#eta|", "0", "2.5", ""),
             pair_probeMultiplicity = cms.vstring("pair_probeMultiplicity", "0","30",""),
             #for Iso
@@ -261,7 +272,16 @@ elif _id == "medium":
                 "RooCMSShape::backgroundFail(mass, alphaFail[70.,60.,90.], betaFail[0.001, 0.,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
                 "efficiency[0.9,0.7,1]",
                 "signalFractionInPassing[0.9]"
-                )
+                ),
+            vpvPlusCMSbeta0p2 = cms.vstring(
+                "Voigtian::signal1(mass, mean1[90,80,100], width[2.495], sigma1[2,1,3])",
+                "Voigtian::signal2(mass, mean2[90,80,100], width,        sigma2[4,3,10])",
+                "SUM::signal(vFrac[0.8,0.5,1]*signal1, signal2)",
+                "RooCMSShape::backgroundPass(mass, alphaPass[70.,60.,90.], betaPass[0.001, 0.,0.1], gammaPass[0.001, 0.,0.1], peakPass[90.0])",
+                "RooCMSShape::backgroundFail(mass, alphaFail[70.,60.,90.], betaFail[0.03, 0.02,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
+                "efficiency[0.9,0.7,1]",
+                "signalFractionInPassing[0.9]"
+            )
         ),
 
         binnedFit = cms.bool(True),
@@ -284,7 +304,7 @@ elif _id == 'tight':
             pt = cms.vstring("muon p_{T}", "0", "1000", "GeV/c"),
             eta    = cms.vstring("muon #eta", "-2.5", "2.5", ""),
             tag_nVertices   = cms.vstring("Number of vertices", "0", "999", ""),
-            phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
+            #phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
             abseta = cms.vstring("muon |#eta|", "0", "2.5", ""),
             pair_probeMultiplicity = cms.vstring("pair_probeMultiplicity", "0","30",""),
             #variables for tightID
@@ -309,9 +329,9 @@ elif _id == 'tight':
         ),
 
         Cuts = cms.PSet(
-            #ID
+            ##ID
             Tight2012_zIPCut = cms.vstring("Tight2012_zIPCut", "Tight2012_zIPCutVar", "0.5"),
-            #Isolations
+            ##Isolations
             LooseIso4 = cms.vstring("LooseIso4" ,"combRelIsoPF04dBeta", "0.25"),
             TightIso4 = cms.vstring("TightIso4" ,"combRelIsoPF04dBeta", "0.15"),
             LooseTkIso3 = cms.vstring("LooseTkIso3" ,"relTkIso", "0.10"),
@@ -363,6 +383,15 @@ elif _id == 'tight':
                 "RooCMSShape::backgroundFail(mass, alphaFail[70.,60.,90.], betaFail[0.001, 0.,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
                 "efficiency[0.9,0.7,1]",
                 "signalFractionInPassing[0.9]"
+            ),
+            vpvPlusCMSbeta0p2 = cms.vstring(
+                "Voigtian::signal1(mass, mean1[90,80,100], width[2.495], sigma1[2,1,3])",
+                "Voigtian::signal2(mass, mean2[90,80,100], width,        sigma2[4,3,10])",
+                "SUM::signal(vFrac[0.8,0.5,1]*signal1, signal2)",
+                "RooCMSShape::backgroundPass(mass, alphaPass[70.,60.,90.], betaPass[0.001, 0.,0.1], gammaPass[0.001, 0.,0.1], peakPass[90.0])",
+                "RooCMSShape::backgroundFail(mass, alphaFail[70.,60.,90.], betaFail[0.03, 0.02,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
+                "efficiency[0.9,0.7,1]",
+                "signalFractionInPassing[0.9]"
             )
         ),
 
@@ -386,7 +415,7 @@ elif _id == 'highpt':
             pair_newTuneP_probe_pt = cms.vstring("muon p_{T} (tune-P)", "0", "1000", "GeV/c"),
             eta    = cms.vstring("muon #eta", "-2.5", "2.5", ""),
             tag_nVertices   = cms.vstring("Number of vertices", "0", "999", ""),
-            phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
+            #phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
             abseta = cms.vstring("muon |#eta|", "0", "2.5", ""),
             pair_probeMultiplicity = cms.vstring("pair_probeMultiplicity", "0","30",""),
             #variables for tightID
@@ -455,11 +484,20 @@ elif _id == 'highpt':
                 "signalFractionInPassing[0.9]"
             ),
             vpvPlusCMS = cms.vstring(
-                "Voigtian::signal1(mass, mean1[90,80,100], width[2.495], sigma1[2,1,3])",
-                "Voigtian::signal2(mass, mean2[90,80,100], width,        sigma2[4,3,10])",
+                "Voigtian::signal1(pair_newTuneP_mass, mean1[90,80,100], width[2.495], sigma1[2,1,3])",
+                "Voigtian::signal2(pair_newTuneP_mass, mean2[90,80,100], width,        sigma2[4,3,10])",
                 "SUM::signal(vFrac[0.8,0.5,1]*signal1, signal2)",
-                "RooCMSShape::backgroundPass(mass, alphaPass[70.,60.,90.], betaPass[0.001, 0.,0.1], gammaPass[0.001, 0.,0.1], peakPass[90.0])",
-                "RooCMSShape::backgroundFail(mass, alphaFail[70.,60.,90.], betaFail[0.001, 0.,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
+                "RooCMSShape::backgroundPass(pair_newTuneP_mass, alphaPass[70.,60.,90.], betaPass[0.001, 0.,0.1], gammaPass[0.001, 0.,0.1], peakPass[90.0])",
+                "RooCMSShape::backgroundFail(pair_newTuneP_mass, alphaFail[70.,60.,90.], betaFail[0.001, 0.,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
+                "efficiency[0.9,0.7,1]",
+                "signalFractionInPassing[0.9]"
+            ),
+            vpvPlusCMSbeta0p2 = cms.vstring(
+                "Voigtian::signal1(pair_newTuneP_mass, mean1[90,80,100], width[2.495], sigma1[2,1,3])",
+                "Voigtian::signal2(pair_newTuneP_mass, mean2[90,80,100], width,        sigma2[4,3,10])",
+                "SUM::signal(vFrac[0.8,0.5,1]*signal1, signal2)",
+                "RooCMSShape::backgroundPass(pair_newTuneP_mass, alphaPass[70.,60.,90.], betaPass[0.001, 0.,0.1], gammaPass[0.001, 0.,0.1], peakPass[90.0])",
+                "RooCMSShape::backgroundFail(pair_newTuneP_mass, alphaFail[70.,60.,90.], betaFail[0.03, 0.02,0.1], gammaFail[0.001, 0.,0.1], peakPass)",
                 "efficiency[0.9,0.7,1]",
                 "signalFractionInPassing[0.9]"
             )
@@ -485,7 +523,7 @@ elif _id == 'soft':
             pt = cms.vstring("muon p_{T}", "0", "1000", "GeV/c"),
             eta    = cms.vstring("muon #eta", "-2.5", "2.5", ""),
             tag_nVertices   = cms.vstring("Number of vertices", "0", "999", ""),
-            phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
+            #phi    = cms.vstring("muon #phi at vertex", "-3.1416", "3.1416", ""),
             abseta = cms.vstring("muon |#eta|", "0", "2.5", ""),
             pair_probeMultiplicity = cms.vstring("pair_probeMultiplicity", "0","30",""),
             #variables for tightID
@@ -608,7 +646,8 @@ if _id == "highpt" :
     )
     PT_ALLETA_BINS = cms.PSet(
         #Main
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 200, 500),
+        #pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 100, 200),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120, 200),
         abseta = cms.vdouble(  0.0, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
@@ -619,7 +658,8 @@ if _id == "highpt" :
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 200, 500),
+        #pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 100, 200),
+        pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
@@ -690,7 +730,8 @@ else:
     )
     PT_ALLETA_BINS = cms.PSet(
         #Main
-        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
+        #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200),
         abseta = cms.vdouble(  0.0, 2.4),
         pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
         #tag selections
@@ -701,7 +742,8 @@ else:
     PT_ETA_BINS = cms.PSet(
         #Main
         #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
+        #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+        pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
         #For testing bkg function
         #pt     = cms.vdouble(60, 80, 120, 200),
         abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
@@ -765,7 +807,8 @@ LOOSE_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 LOOSE_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
+    #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"),
@@ -776,7 +819,8 @@ LOOSE_PT_ALLETA_BINS = cms.PSet(
 )
 LOOSE_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120,  200, 500),
+    #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     PF = cms.vstring("pass"),
@@ -830,7 +874,8 @@ MEDIUM_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 MEDIUM_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
+    #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium2016 = cms.vstring("pass"),
@@ -841,7 +886,8 @@ MEDIUM_PT_ALLETA_BINS = cms.PSet(
 )
 MEDIUM_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
+    #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Medium2016 = cms.vstring("pass"),
@@ -898,7 +944,8 @@ TIGHT_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 TIGHT_PT_ALLETA_BINS = cms.PSet(
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120,  200, 500),
+    #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120, 200),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Tight2012 = cms.vstring("pass"),
@@ -910,7 +957,8 @@ TIGHT_PT_ALLETA_BINS = cms.PSet(
 )
 TIGHT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200, 500),
+    #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 100, 200),
+    pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 120),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     Tight2012 = cms.vstring("pass"),
@@ -981,7 +1029,8 @@ HIGHPT_COARSE_ETA_BINS = cms.PSet(
     tag_combRelIsoPF04dBeta = cms.vdouble(-0.5, 0.2),
 )
 HIGHPT_PT_ALLETA_BINS = cms.PSet(
-    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120,  200, 500),
+    #pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 100, 200),
+    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120, 200),
     abseta = cms.vdouble(  0.0, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     HighPt = cms.vstring("pass"),
@@ -993,7 +1042,8 @@ HIGHPT_PT_ALLETA_BINS = cms.PSet(
 )
 HIGHPT_PT_ETA_BINS = cms.PSet(
     #pt     = cms.vdouble(20, 25, 30, 40, 50, 60, 80, 120, 200),
-    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 80, 120, 200, 500),
+    #pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 100, 200),
+    pair_newTuneP_probe_pt     = cms.vdouble(20, 25, 30, 40, 50, 55, 60, 120),
     abseta = cms.vdouble( 0., 0.9, 1.2, 2.1, 2.4),
     pair_probeMultiplicity = cms.vdouble(0.5, 1.5),
     HighPt = cms.vstring("pass"),
@@ -1056,7 +1106,7 @@ if sample == "mc_MAD":
             #'samples/TnPTree_76X_DYLL_M50_MadGraphMLM_withNVtxWeights_total.root'
             #'root://eoscms//eos/cms/store/group/phys_muon/perrin/Ntuples/80X/tnpZ_MC_noTrgMatch.root'
             #'/afs/cern.ch/work/g/gaperrin/private/TnP/TnP_Muon/CMSSW_8_0_1/src/MuonAnalysis/TagAndProbe/test/zmumu/Example/Production/tnpZ_MC_SmallTree.root'
-            '../Production/TnPTree_80X_DYLL_M50_MadGraphMLM_part1and2_withNVtxWeights.root',
+            #'../Production/TnPTree_80X_DYLL_M50_MadGraphMLM_part1and2_withNVtxWeights.root',
             ),
         InputTreeName = cms.string("fitter_tree"),
         InputDirectoryName = cms.string("tpTree"),
@@ -1066,7 +1116,21 @@ if sample == "mc_MAD":
 if sample == "mc_2016B":
     process.TnP_MuonID = Template.clone(
         InputFileNames = cms.vstring(
-            '../Production/TnPTree_80X_DYLL_M50_MadGraphMLM_part1and2_withNVtxWeights_DataAndTopup.root',
+            #OLD
+            #' ../Production/TnPTree_80X_DYLL_M50_MadGraphMLM_part1and2_withNVtxWeights.root'
+            #'../Production/TnPTree_80X_DYLL_M50_MadGraphMLM_all_withNVtxWeights.root'
+            #'../Production/tnpZ_withNVtxWeights.root',
+            #'../Production/tnpZ_withNVtxWeights_v2.root',
+            #'../Production/tnpZ_withNVtxWeights_v3.root'
+            #'../Production/tnpZ_withNVtxWeights_v4.root'
+            #'../Production/tnpZ_withNVtxWeights_v5.root'
+            #'../Production/tnpZ_withNVtxWeights_v123.root'
+            #NEW
+            'root://eoscms//eos/cms//store/group/phys_muon/perrin/2016eff/MC/tnpZ_withNVtxWeights_v2_part1.root',
+            'root://eoscms//eos/cms//store/group/phys_muon/perrin/2016eff/MC/tnpZ_withNVtxWeights_v2_part2.root',
+            #'root://eoscms//eos/cms//store/group/phys_muon/perrin/2016eff/MC/tnpZ_withNVtxWeights_v2_part3.root',
+            #'root://eoscms//eos/cms//store/group/phys_muon/perrin/2016eff/MC/tnpZ_withNVtxWeights_v2_part4.root',
+            #'root://eoscms//eos/cms//store/group/phys_muon/perrin/2016eff/MC/tnpZ_withNVtxWeights_v2_part5.root'
             ),
         InputTreeName = cms.string("fitter_tree"),
         InputDirectoryName = cms.string("tpTree"),
@@ -1085,11 +1149,23 @@ if sample == "data":
         OutputFileName = cms.string("TnP_MuonID_%s.root" % scenario),
         Efficiencies = cms.PSet(),
         )
-if sample == "data_2016B":
+if sample == "data_7p2invfb":
     process.TnP_MuonID = Template.clone(
         InputFileNames = cms.vstring(
-            'root://eoscms//eos/cms//store/group/phys_muon/TagAndProbe/Run2016/80X_v1/data/TnPTree_80X_Run2016B_v2_GoldenJSON_Run271036to273730_NotCompleted.root',
-            'root://eoscms//eos/cms//store/group/phys_muon/TagAndProbe/Run2016/80X_v1/data/TnPTree_80X_Run2016B_v2_GoldenJSON_Run273731_to_274240_IncludingMissingLumi_NotCompleted.root'
+            #OLD
+            #'root://eoscms//eos/cms/store/group/phys_muon/TagAndProbe/Run2016/80X_v3/data/TnPTree_80X_Run2016C_v2_GoldenJSON_Run275784to276097.root',
+            #'root://eoscms//eos/cms/store/group/phys_muon/TagAndProbe/Run2016/80X_v3/data/TnPTree_80X_Run2016C_v2_GoldenJSON_Run275126to275783.root',
+            #'root://eoscms//eos/cms/store/group/phys_muon/TagAndProbe/Run2016/80X_v3/data/TnPTree_80X_Run2016B_v2_GoldenJSON_Run275126to275783.root',
+            #'root://eoscms//eos/cms/store/group/phys_muon/TagAndProbe/Run2016/80X_v3/data/TnPTree_80X_Run2016B_v2_GoldenJSON_Run271036to275125_incomplete.root'
+            #'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/TnPTree_80X_Run2016C_v2_GoldenJSON_Run275784to276097_subTree_IsoMu20.root',
+            #'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/TnPTree_80X_Run2016C_v2_GoldenJSON_Run275126to275783_subTree_IsoMu20.root',
+            #'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/TnPTree_80X_Run2016B_v2_GoldenJSON_Run275126to275783_subTree_IsoMu20.root',
+            #'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/TnPTree_80X_Run2016B_v2_GoldenJSON_Run271036to275125_incomplete_subTree_IsoMu20.root'
+            #NEW
+            'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/DATA/TnPTree_80X_Run2016B_v2_GoldenJSON_Run275126to275783_subTree_v2.root',
+            'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/DATA/TnPTree_80X_Run2016C_v2_GoldenJSON_Run275126to275783_subTree_v2.root',
+            'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/DATA/TnPTree_80X_Run2016C_v2_GoldenJSON_Run275784to276097_subTree_v2.root',
+            'root://eoscms//eos/cms/store/group/phys_muon/perrin/2016eff/DATA/TnPTree_80X_Run2016B_v2_GoldenJSON_Run271036to275125_incomplete_subTree_v2.root'
             ),
         InputTreeName = cms.string("fitter_tree"),
         InputDirectoryName = cms.string("tpTree"),
@@ -1122,6 +1198,10 @@ if _id == 'loose' and _iso == 'noiso':
         ID_BINS = [
         (("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
         ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_pt_vtx", VTX_BINS_ETA24)),
+        ]
     elif binning == 'all':
         ID_BINS = [
         (("Loose_noIP"), ("NUM_LooseID_DEN_genTracks_PAR_eta", ETA_BINS)),
@@ -1144,6 +1224,10 @@ elif _id == 'medium' and _iso == 'noiso':
     elif binning == 'pt_spliteta':
         ID_BINS = [
         (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("Medium2016_noIP"), ("NUM_MediumID_DEN_genTracks_PAR_pt_vtx", VTX_BINS_ETA24)),
         ]
     elif binning == 'all':
         ID_BINS = [
@@ -1168,6 +1252,10 @@ elif _id == 'tight' and _iso == 'noiso':
         ID_BINS = [
         (("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
         ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
+        ]
     elif binning == 'all':
         ID_BINS = [
         (("Tight2012_zIPCut"), ("NUM_TightIDandIPCut_DEN_genTracks_PAR_eta", ETA_BINS)),
@@ -1190,7 +1278,11 @@ elif _id == 'highpt' and _iso == 'noiso':
         ]
     elif binning == 'pt_spliteta':
         ID_BINS = [
-        (("HighPt2012_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1", PT_ETA_BINS)),
+        ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("HighPt_zIPCut"), ("NUM_HighPtIDandIPCut_DEN_genTracks_PAR_vtx", VTX_BINS_ETA24)),
         ]
     elif binning == 'all':
         ID_BINS = [
@@ -1242,6 +1334,10 @@ elif _id == 'loose' and _iso == 'loose':
         ID_BINS = [
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_pt_spliteta_bin1", LOOSE_PT_ETA_BINS)),
         ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_vtx", LOOSE_VTX_BINS_ETA24)),
+        ]
     elif binning == 'all':
         ID_BINS = [
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_LooseID_PAR_eta", LOOSE_ETA_BINS)),
@@ -1264,6 +1360,10 @@ elif _id == 'medium' and _iso == 'loose':
         ID_BINS = [
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_pt_spliteta_bin1", MEDIUM_PT_ETA_BINS)),
        ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_vtx", MEDIUM_VTX_BINS_ETA24)),
+       ]
     elif binning == 'all':
         ID_BINS = [
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_MediumID_PAR_eta", MEDIUM_ETA_BINS)),
@@ -1285,6 +1385,10 @@ elif _id == 'tight' and _iso == 'loose':
     elif binning == 'pt_spliteta':
         ID_BINS = [
         (("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_pt_spliteta_bin1", TIGHT_PT_ETA_BINS)),
+        ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("LooseIso4"), ("NUM_LooseRelIso_DEN_TightID_PAR_vtx", TIGHT_VTX_BINS_ETA24)),
         ]
     elif binning == 'all':
         ID_BINS = [
@@ -1338,6 +1442,10 @@ elif _id == 'medium' and _iso == 'tight':
     elif binning == 'pt_spliteta':
         ID_BINS = [
         (("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_pt_spliteta_bin1", MEDIUM_PT_ETA_BINS)),
+        ]
+    elif binning == 'vtx':
+        ID_BINS = [
+        (("TightIso4"), ("NUM_TightRelIso_DEN_MediumID_PAR_vtx", MEDIUM_VTX_BINS_ETA24)),
         ]
     elif binning == 'all':
         ID_BINS = [
@@ -1471,16 +1579,58 @@ for ID, ALLBINS in ID_BINS:
     #save the fitconfig in the plot directory
     shutil.copyfile(os.getcwd()+'/fitMuon.py',_output+'/fitMuon.py')
     shape = cms.vstring("vpvPlusExpo")
+    #Change bins
+    #if bgFitFunction == 'custom' and X.find("spliteta") != -1: B.abseta = cms.vdouble(0.0, 0.9)
+    #if bgFitFunction == 'custom': module.Variables.mass[2]="120"
+
+
     #shape = "vpvPlusCheb"
     if not "Iso" in ID:  #customize only for ID
-        if _id == "highpt" :
-            if (len(B.pair_newTuneP_probe_pt)==11):
-                shape = cms.vstring("vpvPlusExpo","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb","*pt_bin8*","vpvPlusCheb","*pt_bin9*","vpvPlusCheb")
-        else:
-            if (len(B.pt)==10):
-                shape = cms.vstring("vpvPlusExpo","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb","*pt_bin8*","vpvPlusCheb")
-        if bgFitFunction == 'CMSshape':
-            shape = cms.vstring("vpvPlusCMS")
+        if bgFitFunction == 'default':
+            if not ('pt_alleta_bin1' in X or 'pt_spliteta_bin1' in X): 
+                if _id == "highpt":
+                    if (len(B.pair_newTuneP_probe_pt)==9):
+                        shape = cms.vstring("vpvPlusExpo","*pt_bin4*","vpvPlusCheb","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb")
+                else:
+                    if (len(B.pt)==8):
+                        shape = cms.vstring("vpvPlusExpo","*pt_bin4*","vpvPlusCheb","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb")
+            else:
+                if _id == "highpt":
+                    if (len(B.pair_newTuneP_probe_pt)==9):
+                        shape = cms.vstring("vpvPlusCMS","*pt_bin3*","vpvPlusCMSbeta0p2","*pt_bin4*","vpvPlusCMSbeta0p2","*pt_bin5*","vpvPlusCMSbeta0p2","*pt_bin6*","vpvPlusCMSbeta0p2","*pt_bin7*","vpvPlusCMS")
+                    if (len(B.pair_newTuneP_probe_pt)==8):
+                        shape = cms.vstring("vpvPlusCMS","*pt_bin3*","vpvPlusCMSbeta0p2","*pt_bin4*","vpvPlusCMSbeta0p2","*pt_bin5*","vpvPlusCMSbeta0p2","*pt_bin6*","vpvPlusCMSbeta0p2")
+                else:
+                    if (len(B.pt)==8):
+                        shape = cms.vstring("vpvPlusCMS","*pt_bin3*","vpvPlusCMSbeta0p2","*pt_bin4*","vpvPlusCMSbeta0p2","*pt_bin5*","vpvPlusCMSbeta0p2","*pt_bin6*","vpvPlusCMS")
+                    if (len(B.pt)==7):
+                        shape = cms.vstring("vpvPlusCMS","*pt_bin3*","vpvPlusCMSbeta0p2","*pt_bin4*","vpvPlusCMSbeta0p2","*pt_bin5*","vpvPlusCMSbeta0p2")
+        elif bgFitFunction == 'CMSshape':
+            if _id == "highpt":
+                if (len(B.pair_newTuneP_probe_pt)==9):
+                    shape = cms.vstring("vpvPlusExpo","*pt_bin4*","vpvPlusCMS","*pt_bin5*","vpvPlusCMS","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb")
+            else:
+                if (len(B.pt)==8):
+                    shape = cms.vstring("vpvPlusExpo","*pt_bin4*","vpvPlusCMS","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb")
+        #if bgFitFunction == 'custom':
+            #if _id == "highpt":
+            #    if (len(B.pair_newTuneP_probe_pt)==9):
+            #        shape = cms.vstring("vpvPlusExpo","*pt_bin4*","vpvPlusCheb","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb")
+            #else:
+            #    if (len(B.pt)==8):
+            #        shape = cms.vstring("vpvPlusExpo","*pt_bin4*","vpvPlusCheb","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb")
+            #if _id == "highpt":
+            #    if (len(B.pair_newTuneP_probe_pt)==9):
+            #        shape = cms.vstring("vpvPlusCMS","*pt_bin1*","vpvPlusExpo","*pt_bin2*","vpvPlusExpo","*pt_bin3*","vpvPlusExpo","*pt_bin4*","vpvPlusCheb","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb","*pt_bin7*","vpvPlusCheb")
+            #else:
+            #    if (len(B.pt)==8):
+            #        shape = cms.vstring("vpvPlusCMS","*pt_bin1*","vpvPlusExpo","*pt_bin2*","vpvPlusExpo","*pt_bin3*","vpvPlusExpo","*pt_bin4*","vpvPlusCheb","*pt_bin5*","vpvPlusCheb","*pt_bin6*","vpvPlusCheb")
+            #if _id == "highpt":
+            #    if (len(B.pair_newTuneP_probe_pt)==9):
+            #        shape = cms.vstring("vpvPlusCMS","*pt_bin3*","vpvPlusCMSbeta0p2","*pt_bin4*","vpvPlusCMSbeta0p2","*pt_bin5*","vpvPlusCMSbeta0p2","*pt_bin6*","vpvPlusCMSbeta0p2","*pt_bin7*","vpvPlusCMS")
+            #else:
+            #    if (len(B.pt)==8):
+            #        shape = cms.vstring("vpvPlusCMS","*pt_bin3*","vpvPlusCMSbeta0p2","*pt_bin4*","vpvPlusCMSbeta0p2","*pt_bin5*","vpvPlusCMSbeta0p2","*pt_bin6*","vpvPlusCMS")
     DEN = B.clone(); num = ID;
 
     mass_variable ="mass"
@@ -1505,7 +1655,7 @@ for ID, ALLBINS in ID_BINS:
         setattr(process, "TnP_MuonID_"+ID+"_"+X, module)
         setattr(process, "run_"+ID+"_"+X, cms.Path(module))
     elif scenario == 'mc_all':
-        if num.find("Iso4") != -1:
+        if num.find("Iso4") != -1 or num.find("Iso3") != -1:
             setattr(module.Efficiencies, ID+"_"+X, cms.PSet(
                 EfficiencyCategoryAndState = cms.vstring(num,"below"),
                 UnbinnedVariables = cms.vstring(mass_variable,"weight"),
