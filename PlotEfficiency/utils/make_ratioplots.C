@@ -120,11 +120,12 @@ int make_ratioplots(TString _file, TString _canvas, TString _path1, TString _pat
     if(_xtitle.Contains("nVertices")){_xtitle = "N(primary vertices)";
     }else if (_xtitle.Contains("phi")){_xtitle = "muon #phi";}
     else if (_xtitle.Contains("eta")){_xtitle = "muon #eta";}
-    else if (_xtitle.Contains("pt")){_xtitle = "muon p_{t} [GeV]"; pad1->SetLogx();}
+    else if (_xtitle.Contains("pt")){_xtitle = "muon p_{t} [GeV]"; /*pad1->SetLogx();*/}
     eff1->GetXaxis()->SetTitle(_xtitle);
     TString _title = eff1->GetXaxis()->GetTitle();
     eff1->GetXaxis()->SetTitle("");
     eff1->GetYaxis()->SetRangeUser(0.79, 1.1);
+    //eff1->GetYaxis()->SetRangeUser(0.49, 1.2);
     eff1->GetYaxis()->SetTitleSize(27);
     eff1->GetYaxis()->SetTitleFont(63);
     eff1->GetYaxis()->SetLabelFont(43);
@@ -136,6 +137,7 @@ int make_ratioplots(TString _file, TString _canvas, TString _path1, TString _pat
     eff2->SetMarkerStyle(21);
     eff2->SetMarkerColor(4);
     TLegend* leg = new TLegend(0.45, 0.65, 0.75 , 0.85);
+    //TLegend* leg = new TLegend(0.4, 0.70, 0.7 , 0.875);
     leg->SetHeader(_legtext);
     TLegendEntry *header = (TLegendEntry*)leg->GetListOfPrimitives()->First();
     header->SetTextColor(1);
@@ -147,6 +149,7 @@ int make_ratioplots(TString _file, TString _canvas, TString _path1, TString _pat
     cout<<"path2 is"<< _path2<<endl;
     if(_path1.Contains("DATA")){
 	    _leg1 = "data";
+	    //_leg1 = "beforeL2fix";
             if(_path1.Contains("_default")){_leg1 = "default";} 
 	    else if(_path1.Contains("_CMSshape")) {_leg1 = "CMSshape";} 
     }
@@ -165,6 +168,7 @@ int make_ratioplots(TString _file, TString _canvas, TString _path1, TString _pat
         if(_path2.Contains("NLO")) _leg2 = "MC NLO";
         else if(_path2.Contains("LO")) _leg2 = "MC LO";
         else _leg2 = "MC";
+        //else _leg2 = "afterL2fix";
     }
     
 
@@ -188,13 +192,14 @@ int make_ratioplots(TString _file, TString _canvas, TString _path1, TString _pat
     pad2->SetGridy(); 
     pad2->Draw();
     pad2->cd();
-    if (_xtitle.Contains("p_{t}")){pad2->SetLogx();}
+    //if (_xtitle.Contains("p_{t}")){pad2->SetLogx();}
     ratio->SetTitle("");
     ratio->SetLineWidth(2);
     ratio->SetLineColor(1);
     ratio->SetMarkerStyle(20);
     ratio->SetMarkerColor(1);
     ratio->GetYaxis()->SetRangeUser(0.94,1.03999);
+    //ratio->GetYaxis()->SetRangeUser(0.9,1.1);
     ratio->GetYaxis()->SetTitle("Data/MC");
     //ratio->GetYaxis()->SetTitle("with/no trigger");
     ratio->GetYaxis()->SetNdivisions(505);
