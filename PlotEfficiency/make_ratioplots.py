@@ -41,16 +41,19 @@ def getparameter(_file):
     _par = [] 
     if _file.find('PAR_eta') != -1: _par.append('eta_PLOT')
     elif _file.find('coarse_eta') != -1: _par.append('abseta_PLOT')
-    elif _file.find('pt_alleta') != -1:
+    elif _file.find('PAR_pt') != -1:
         if _file.find('NUM_HighPtIDandIPCut_DEN_genTracks') != -1 or _file.find('NUM_LooseRelTkIso_DEN_HighPtID') != -1:
             _par.append('pair_newTuneP_probe_pt_PLOT')
         else: _par.append('pt_PLOT')
-    elif _file.find('pt_spliteta') != -1 and (_file.find('NUM_LooseRelTkIso_DEN_HighPtID_PAR') != -1 or _file.find('NUM_HighPtIDandIPCut_DEN_genTracks') != -1): 
+    elif  _file.find('PAR_newpt') != -1:
+        if _file.find('NUM_HighPtID_DEN_genTracks_PAR') != -1 or _file.find('NUM_LooseRelTkIso_DEN_HighPtIDandIPCut_PAR') != -1:
+            _par.append('pair_newTuneP_probe_pt_PLOT')
+    elif _file.find('pt_eta') != -1 and (_file.find('NUM_LooseRelTkIso_DEN_HighPtID_PAR') != -1 or _file.find('NUM_HighPtIDandIPCut_DEN_genTracks') != -1): 
         _par.append('pair_newTuneP_probe_pt_PLOT_abseta_bin0')
         _par.append('pair_newTuneP_probe_pt_PLOT_abseta_bin1')
         _par.append('pair_newTuneP_probe_pt_PLOT_abseta_bin2')
         _par.append('pair_newTuneP_probe_pt_PLOT_abseta_bin3')
-    elif _file.find('pt_spliteta') != -1: 
+    elif _file.find('pt_eta') != -1: 
         _par.append('pt_PLOT_abseta_bin0')
         _par.append('pt_PLOT_abseta_bin1')
         _par.append('pt_PLOT_abseta_bin2')
@@ -58,6 +61,12 @@ def getparameter(_file):
     elif _file.find('pt_highabseta') != -1:_par.append('pt_PLOT')
     elif _file.find('_vtx') != -1: _par.append('tag_nVertices_PLOT')
     elif _file.find('_phi') != -1: _par.append('phi_PLOT')
+    #change for trigger study
+    #else: 
+    #    _par.append('pt_PLOT_abseta_bin0')
+    #    _par.append('pt_PLOT_abseta_bin1')
+    #    _par.append('pt_PLOT_abseta_bin2')
+    #    _par.append('pt_PLOT_abseta_bin3')
     else: 
         print "@ERROR: parameter not found !"
         sys.exit()
@@ -70,15 +79,15 @@ def makeleg(_canvas):
     den = _canvas[_canvas.find('DEN_')+4:_canvas.find('PAR_')-1] 
     par1 = _canvas[_canvas.find('PAR_')+4:].split('_')[0]
     par2 =  _canvas[_canvas.find('PAR_')+4:].split('_')[1]
-    print 'par2 is', par2
-    NUMleg = {'LooseID':'Loose Id','MediumID':'Medium Id','TightIDandIPCut':'Tight Id','SoftID':'Soft Id','LooseRelIso':'Loose Iso','TightRelIso':'Tight Iso','tkRelIso4':'Tracker Iso','HighPtIDandIPCut':'Hight p_{T} Id','LooseRelTkIso':'Tracker Iso #leq 0.1'}
-    DENleg = {'genTracks':'','LooseID':'/Loose Id','MediumID':'/Medium Id','TightID':'/Tight Id','HighPtID':'/Hight p_{T} Id'}
-    PAR2leg = {'eff':', p_{T} #geq 20 GeV','alleta':', p_{T} #geq 20 GeV','spliteta':'','alleta':', #||{#eta} #leq 2.4', 'vtx/fit':', p_{T} #geq 20 GeV', 'phi/fit':', p_{T} #geq 20 GeV', 'hpt/fit':', p_{T} #geq 55 GeV'}
+    print 'par3 is', par2
+    NUMleg = {'LooseID':'Loose Id','MediumID':'Medium Id','TightID':'Tight Id','SoftID':'Soft Id','LooseRelIso':'Loose Iso','TightRelIso':'Tight Iso','tkRelIso5':'Tracker Iso','HighPtID':'Hight p_{T} Id','LooseRelTkIso':'Tracker Iso #leq 0.1'}
+    DENleg = {'genTracks':'','LooseID':'/Loose Id','MediumID':'/Medium Id','TightIDandIPCut':'/Tight Id','HighPtIDandIPCut':'/Hight p_{T} Id'}
+    PAR2leg = {'eff':', p_{T} #geq 20 GeV','alleta':', p_{T} #geq 20 GeV','eta/fit':'','alleta':', #||{#eta} #leq 2.4', 'vtx/fit':', p_{T} #geq 20 GeV', 'phi/fit':', p_{T} #geq 20 GeV', 'hpt/fit':', p_{T} #geq 55 GeV'}
     
     leg += NUMleg[num]
     leg += DENleg[den]
     leg += PAR2leg[par2]
-    if par2 == 'spliteta':
+    if par2 == 'eta/fit':
         if _canvas.find('PLOT_abseta_bin0') != -1:
             leg += ' , #||{#eta} #leq 0.9'
         elif _canvas.find('PLOT_abseta_bin1') != -1:
@@ -94,6 +103,16 @@ def makeleg(_canvas):
     if leg == '':
         print "@ERROR: empty legend !"
         sys.exit()
+    ##for trigg only
+    #leg = 'IsoMu22 || IsoTkMu22' 
+    #if _canvas.find('abseta_bin0') != -1:
+    #    leg += ' , #||{#eta} #leq 0.9'
+    #elif _canvas.find('abseta_bin1') != -1:
+    #    leg += ' , 0.9 #leq #||{#eta} #leq 1.2'
+    #elif _canvas.find('abseta_bin2') != -1:
+    #    leg += ' , 1.2 #leq #||{#eta} #leq 2.1'
+    #elif _canvas.find('abseta_bin3') != -1:
+    #    leg += ' , 2.1 #leq #||{#eta} #leq 2.4'
     return leg
 
 import sys, os
@@ -118,8 +137,13 @@ if not os.path.exists(_output):
 if not os.path.exists(_output):
     os.makedirs(_output)
 
+print 'debug'
+
 r.gROOT.LoadMacro("utils/make_ratioplots.C+")
+#r.gROOT.LoadMacro("utils/make_efficiencyplots.C+")
 debug = True 
+
+print 'debug2'
 
 inputeff = os.getcwd() + "/Efficiency" + iteration 
 
@@ -144,6 +168,11 @@ dir = os.listdir(_path1)
 for file in dir:
     print 'the file is ', file
     if file.find('TnP_') != -1: 
+        #if not 'HighPtIDandIPCut' in file: continue
+        #if 'TnP_MC_NUM_LooseRelTkIso_DEN_HighPtIDandIPCut_PAR_newpt' in file: continue
+        #if not 'NUM_HighPtID_DEN' in file: continue
+        #if 'vtx' in file: continue
+        #if 'TnP_MC_NUM_HighPtID_DEN_genTracks_PAR_vtx.root' in file: continue
         if not os.path.isfile(_path2 + '/' + file):
             if debug: print 'The file ', file, 'doesn\'t exist in ', _path2
             continue
@@ -153,4 +182,8 @@ for file in dir:
             #print "CANVAS is", CANVAS
             for _canvas in CANVAS:
                 print 'will retrieve the canvas ', _canvas
+                legtxt= makeleg(_canvas)
+                print 'legtext is', legtxt
                 r.make_ratioplots(file, _canvas, _path1, _path2, _output, makeleg(_canvas))
+                #r.make_efficiencyplots(file, _canvas, _path1, _output, legtxt)
+
